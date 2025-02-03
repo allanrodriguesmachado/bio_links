@@ -24,6 +24,11 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+           'email'=> ['required', 'email'],
+            'password' => ['required']
+        ]);
+
         $email = request()->email;
 
         if ($user = User::query()->where('email', '=', $email)->first()) {
