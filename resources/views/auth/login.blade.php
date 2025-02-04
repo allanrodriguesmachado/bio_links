@@ -1,5 +1,5 @@
 <div>
-    <form action="/login" method="post">
+    <form action="{{route('login')}}" method="post">
         @csrf
 
 
