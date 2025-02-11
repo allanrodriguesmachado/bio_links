@@ -29,14 +29,11 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function tryToRegister()
+    public function tryToRegister(): void
     {
-        $user = new User();
-        $user->name = request()->name;
-        $user->email = request()->email;
-        $user->password = request()->password;
-
-
+        $user = User::query()->create(
+            $this->validated()
+        );
         $user->save();
 
     }
