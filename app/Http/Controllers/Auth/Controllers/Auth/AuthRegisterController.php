@@ -16,8 +16,9 @@ class AuthRegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
+
         if ($request->tryToRegister()) {
-            return to_route('dashbord');
+            return to_route('dashboard');
         }
 
         return back()->with([
