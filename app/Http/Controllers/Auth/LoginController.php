@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MakeLoginRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
