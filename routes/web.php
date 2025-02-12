@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\AuthRegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,9 +19,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthRegisterController::class, 'register']);
 });
 
-Route::get('/logout', \App\Http\Controllers\Auth\LogoutController::class)->middleware('auth')->name('logout');
-Route::get('/dashboard', fn() => 'Dashboard:: ' . auth()->id())->middleware('auth')->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', LogoutController::class)->name('logout');
+    Route::get('/dashboard', fn() => 'Dashboard:: ' . auth()->id())->name('dashboard');
+    Route::get('/links/create', [LinkController::class, 'create'])->name('links.create');
+    Route::post('/links/create', [LinkController::class, 'store']);
+});
 
-//Route::get('/dashboard', [
-//    LoginController::class, 'dash'
-//])->name('dashboard' . auth()->id());

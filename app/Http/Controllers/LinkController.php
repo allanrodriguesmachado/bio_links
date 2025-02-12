@@ -8,37 +8,27 @@ use App\Models\Link;
 
 class LinkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
     {
-        //
+        return view('links.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLinkRequest $request)
+    public function store(StoreLinkRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        Link::query()->create(
+            $request->validated()
+        );
+
+        return to_route('dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Link $link)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
