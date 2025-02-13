@@ -13,6 +13,6 @@ class DashboardController extends Controller
          * @var User $user
          */
         $user = auth()->user();
-        return view('dashboard')->with('user', $user);
+        return view('dashboard')->with('links', $user->links);
     }
 }
