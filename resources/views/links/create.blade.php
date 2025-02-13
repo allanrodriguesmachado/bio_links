@@ -29,10 +29,10 @@
             <button type="submit">Register</button>
         </div>
 
-        <div>
-            <a href="{{route('welcome')}}">
-                <button>Voltar</button>
-            </a>
-        </div>
+{{--        <div>--}}
+{{--            <a href="{{route('welcome')}}">--}}
+{{--                <button>Voltar</button>--}}
+{{--            </a>--}}
+{{--        </div>--}}
     </form>
 </div>

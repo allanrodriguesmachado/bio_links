@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\AuthRegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LinkController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,7 +21,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('logout');
-    Route::get('/dashboard', fn() => 'Dashboard:: ' . auth()->id())->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/links/create', [LinkController::class, 'create'])->name('links.create');
     Route::post('/links/create', [LinkController::class, 'store']);
 });
