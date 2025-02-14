@@ -33,26 +33,24 @@ class LinkController extends Controller
         return to_route('dashboard');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Link $link)
     {
-        //
+       return view('links.edit', compact('link'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateLinkRequest $request, Link $link)
     {
-        //
+//        $link->link = $request->link;
+//        $link->name = $request->name;
+//        $link->save();
+
+        $link->fill($request->validated())->save();
+
+        return to_route('dashboard', with([
+            'message' => 'Link updated successfully',
+        ]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Link $link)
     {
         //

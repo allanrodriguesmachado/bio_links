@@ -22,6 +22,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/link/{link}/edit', [LinkController::class, 'edit'])->name('link.edit');
+    Route::put('/link/{link}/edit', [LinkController::class, 'update'])->name('link.update');
     Route::get('/links/create', [LinkController::class, 'create'])->name('links.create');
     Route::post('/links/create', [LinkController::class, 'store']);
 });

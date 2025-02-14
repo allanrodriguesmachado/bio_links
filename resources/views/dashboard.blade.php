@@ -1,8 +1,17 @@
 <h1>Dashboard</h1>
 
+
+
+
 @foreach($links AS $link)
+    @if($message = session()->get('message'))
+        {{dd($message)}}
+        <div>
+            <h1>{{$message}}</h1>
+        </div>
+    @endif
     <ul>
-        <li>{{$link['name']}}</li>
-        <li>{{$link['link']}}</li>
+
+        <li><a href="{{route('link.edit', $link)}}">{{$link['name']}}</a></li>
     </ul>
 @endforeach
