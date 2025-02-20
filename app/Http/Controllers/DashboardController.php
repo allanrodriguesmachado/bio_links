@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
     {
         /**
          * @var User $user
          */
         $user = auth()->user();
-        return view('dashboard')->with('links', $user->links);
+        return view('dashboard')->with('links', $user->links()->orderBy('sort')->get());
     }
 }

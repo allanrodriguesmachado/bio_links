@@ -23,7 +23,6 @@ class LinkController extends Controller
      */
     public function store(StoreLinkRequest $request): \Illuminate\Http\RedirectResponse
     {
-
         /**
          * @var User $user;
          */
@@ -51,8 +50,25 @@ class LinkController extends Controller
         ]));
     }
 
-    public function destroy(Link $link)
+    public function destroy(Link $link): \Illuminate\Http\RedirectResponse
     {
-        //
+        $link->delete();
+
+        return to_route('dashboard', with([
+            'message' => 'Link deleted successfully',
+        ]));
+    }
+
+    public function up(Link $link)
+    {
+        $link->moveUp();
+
+       return back();
+    }
+
+    public function down(Link $link) {
+        $link->moveDown();
+
+        return back();
     }
 }
