@@ -6,6 +6,8 @@ use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 
 class LinkController extends Controller
 {
@@ -21,7 +23,7 @@ class LinkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLinkRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreLinkRequest $request): RedirectResponse
     {
         /**
          * @var User $user;
@@ -32,17 +34,18 @@ class LinkController extends Controller
         return to_route('dashboard');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Link $link)
     {
+        $this->authorize('update', $link);
+
        return view('links.edit', compact('link'));
     }
 
     public function update(UpdateLinkRequest $request, Link $link)
     {
-//        $link->link = $request->link;
-//        $link->name = $request->name;
-//        $link->save();
-
         $link->fill($request->validated())->save();
 
         return to_route('dashboard', with([
@@ -50,7 +53,7 @@ class LinkController extends Controller
         ]));
     }
 
-    public function destroy(Link $link): \Illuminate\Http\RedirectResponse
+    public function destroy(Link $link): RedirectResponse
     {
         $link->delete();
 

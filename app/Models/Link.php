@@ -13,6 +13,12 @@ class Link extends Model
     /** @use HasFactory<LinkFactory> */
     use HasFactory;
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function moveUp(): void
     {
 
